@@ -31,10 +31,11 @@ This is a quick project to create a basic setup for local docker development env
 
 ### buildEnv and buildEnvDown Scripts
 
-devEnv script is a script that creates an isolated dev server environment that serves on nginx,
+`buildEnv` script is a script that creates an isolated dev server environment that serves on nginx,
 - It will serve on CONTAINER_IP_ADDRESS:4000.
 - First it builds in a builder container, then the built pages will be copied into a nginx container and old container will stop working. We will only keep server container for this job.
-buildEnvDown script is the script that does take down anything related to buildEnv script *except for old dangling images*. If you want to clear dangling images as well, uncomment last line in the script.
+
+`buildEnvDown` script is the script that does take down anything related to buildEnv script *except for old dangling images*. If you want to clear dangling images as well, uncomment last line in the script.
 
 
 ## TL;DR
