@@ -1,0 +1,15 @@
+#!/bin/bash
+## *mostly* cleans up workflow of buildEnv script.
+## if you want complete clean up, please note that it does not prune any old untagged docker images unless you uncomment last line
+
+# remove local certificates
+rm -rf ../nginx/certs
+
+# take down containers and network system of docker
+docker-compose -f ../.docker/docker-compose.build.yml -p vuejsappbuild down -v
+
+## remove image
+
+echo "The actions below will require your consent."
+docker image rm vuejsappbuild-web:latest
+#docker image prune -a

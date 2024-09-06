@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# VueJS V2 webserver creation script for local development
+# Requires: docker, docker-compose(V3), openssl  
+# Please note that this creates both a https and http instance in their respective ports.
+# This workflow takes a few seconds longer than devEnv workflow, since it will rebuild each change, please bear it in mind.
+
+## Certificate directories
+# if you change these please change them in ../.docker/Dockerfile.build as well.
+CERT_DIR="../nginx/certs"
+CERT_KEY="$CERT_DIR/selfsigned.key"
+CERT_CRT="$CERT_DIR/selfsigned.crt"
+
+
+
+## Checking whether there is already a certificate created for https setup
+if [[ -f "$CERT_KEY" && -f "$CERT_CRT" ]]; then
+    echo "Certificate already exists, skipping generation."
+else
+    echo "Certificate not found, generating new self-signed certificate..."
+
+    # Create the directory if it doesn't exist
+    mkdir -p $CERT_DIR
+
+    # Generate the self-signed certificate
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout "$CERT_KEY" -out "$CERT_CRT" \
+        -subj "/CN=localhost"
+
+    echo "Self-signed certificate created at $CERT_DIR"
+fi
+
+
+## Run docker-compose, it forces to recreate each tiem and build from the ground.
+## thanks to how docker works, if something didn't change it will run from cache(unless you ran buildEnvDown script)
+docker-compose -f ../.docker/docker-compose.build.yml -p vuejsappbuild up --force-recreate --build -d
+
+## IP address of the app
+LOCAL_IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' vuejsBuild)
+
+echo "Webserver running on http://$LOCAL_IP:80 and https://$LOCAL_IP:443"
