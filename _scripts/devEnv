@@ -1,4 +1,10 @@
 #!/bin/bash
 
+
+## compose up the dev application
 docker-compose -f ../.docker/docker-compose.dev.yml -p vuejsapp up --force-recreate --build -d
-docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' vuejsDev 
+CONTAINER_IP_ADDR=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' vuejsDev)
+
+echo "Dev server running on http://${CONTAINER_IP_ADDR}:4000"
+
+
