@@ -1,0 +1,12 @@
+version: '3.9'
+name: vuejsapp
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: ./.docker/Dockerfile.dev
+    
+    container_name: vuejsDev
+    ports:
+      - "4000:4000"
+
