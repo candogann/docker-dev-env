@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker-compose -f ../.docker/docker-compose.yml -p vuejsapp up --force-recreate --build -d
+docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' vuejsDev 
