@@ -7,6 +7,8 @@ This project has been forked from github.com/vuejs/v2.vuejs.org at 2024-09-06. I
 
 This is a quick project to create a basic setup for local docker development environment. Using scripts at the /_scripts folder, you can start a local development environment using only docker, docker-compose and openssl(not required for devEnv script).
 
+
+![Workflow diagram of the Project](docs/diagram.png)
 ## Requirements
 
 - Docker
