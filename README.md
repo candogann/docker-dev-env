@@ -24,8 +24,9 @@ This is a quick project to create a basic setup for local docker development env
 - For the documentation regarding how the scripts work, see the source files for comments.
 ### devEnv and devEnvDown Scripts
 
-devEnv script is a script that creates an isolated dev environment via 'npm run dev', it will serve on CONTAINER_IP_ADDRESS:4000. It will build and serve faster than build script.
-devEnvDown script is the script that does take down anything related to devEnv script *except for old dangling images*. If you want to clear dangling images as well, uncomment last line in the script.
+`devEnv` script is a script that creates an isolated dev environment via 'npm run dev', it will serve on CONTAINER_IP_ADDRESS:4000. It will build and serve faster than build script.
+
+`devEnvDown` script is the script that does take down anything related to devEnv script *except for old dangling images*. If you want to clear dangling images as well, uncomment last line in the script.
 
 
 ### buildEnv and buildEnvDown Scripts
