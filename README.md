@@ -16,11 +16,34 @@ This is a quick project to create a basic setup for local docker development env
 - openssl
 
 *Please note that older versions might not work, if you face docker-based issues, update your both docker and docker-compose to newer version.
+## Usage Guide 
 
-## Usage
+### Quick Usage
+
+- Install docker, docker-compose and openssl on your local machine.
+- In ./_scripts folder, run 'sudo bash {script_name}'. If you want a dev server without nginx and https, run devEnv script. If you want a server that is built and running on https, run buildEnv script.
+- It will automatically start a docker container.
+- To clean up, run 'sudo bash {down_script_name}'
+
+Example Usage:
+```
+
+# Always run scripts in ./_scripts directory
+cd ./_scripts
+
+# Run dev env
+sudo bash devEnv
+sudo bash devEnvDown
+
+# Run nginx build env
+sudo bash buildEnv
+sudo bash buildEnvDown
+```
+
+## Details
 
 - In your machine, unless you configured for it, all commands will require 'sudo' or right priviliges.
-- To use any script, use "bash {script_name}" in _scripts file. If you run scripts in other directories like "bash /_scripts/{script_name}" you will face issues.
+- To use any script, you can use "bash {script_name}" in _scripts file. If you run scripts in other directories like "bash /_scripts/{script_name}" you will face issues.
 - For the documentation regarding how the scripts work, see the source files for comments.
 ### devEnv and devEnvDown Scripts
 
@@ -37,14 +60,5 @@ This is a quick project to create a basic setup for local docker development env
 
 `buildEnvDown` script is the script that does take down anything related to buildEnv script *except for old dangling images*. If you want to clear dangling images as well, uncomment last line in the script.
 
-
-## TL;DR
-
-Project to quickly deploy dev environment based on docker.
-
-### Usage
-
-- Install docker, docker-compose and openssl
-- In ./_scripts folder, run 'sudo bash {script_name}'
 
 
